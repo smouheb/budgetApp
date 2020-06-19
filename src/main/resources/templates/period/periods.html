@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:insert="reusables :: heads">
+	</head>
+	<body>
+	 <nav th:insert="reusables :: navbars"></nav>
+	  <br>
+	  <div class="container">
+	  	<a th:href="@{/period-mgmt}">
+		 	<input class="btn btn-info" value="List of Periods">
+		 </a>
+	  	 <h1 class="text-center">Create a new Period</h1>
+	 	<br>
+	 	<div class="row">
+		 	<div class="col-md-6">
+		 		<form action="/save-period" method="post" th:object="${period}">
+					<div class="input-group mb-3">
+					  <div class="input-group-prepend">
+					    <span class="input-group-text" id="inputGroup-sizing-default">Period name</span>
+					  </div>
+					  <select name="typeExpense" th:field="*{name}" class="form-control">
+						<option value=""></option>
+						<option th:each="period : ${T(com.budget.fam.enums.PeriodName).values()}"
+								th:value="${period}" 
+								th:selected="${period}"
+								th:text="${period.displayName}">
+						</option>
+					</select>
+					</div>		
+					<div class="input-group mb-3">
+					  <div class="input-group-prepend">
+					    <span class="input-group-text" id="inputGroup-sizing-default">Status</span>
+					  </div>
+					  <select name="typeExpense" th:field="*{status}" class="form-control">
+						<option value=""></option>
+						<option th:each="type : ${T(com.budget.fam.enums.Status).values()}"
+								th:value="${type}" 
+								th:selected="${type}"
+								th:text="${type.displayItem}">
+						</option>
+					</select>
+					</div>
+					<div class="input-group mb-3">
+					  <div class="input-group-prepend">
+					    <span class="input-group-text" id="inputGroup-sizing-default">Pre Defined Expenses</span>
+					  </div>
+					  <select name="expense" th:field="*{expense}" class="form-control" multiple>
+						<option value=""></option>
+						<option th:each="type : ${expense}"
+								th:value="${type.id}" 
+								th:selected="${type}"
+								th:text="${type.name + ' - ' + type.amount + ' eur'}">
+						</option>
+					</select>
+					</div>	
+					<div class="input-group mb-3">
+					  <div class="input-group-prepend">
+					    <span class="input-group-text" id="inputGroup-sizing-default">Income</span>
+					  </div>
+					  <select name="income" th:field="*{incomes}" class="form-control" multiple>
+						<option value=""></option>
+						<option th:each="type : ${income}"
+								th:value="${type.id}" 
+								th:selected="${type}"
+								th:text="${type.name + ' - ' + type.amount + ' eur'}">
+						</option>
+					</select>
+					</div>
+					<div class="input-group mb-3">
+					  <div class="input-group-prepend">
+					    <span class="input-group-text" id="inputGroup-sizing-default">Savings</span>
+					  </div>
+					  <select name="savings" th:field="*{savings}" class="form-control" multiple>
+						<option value=""></option>
+						<option th:each="type : ${savings}"
+								th:value="${type.id}" 
+								th:selected="${type}"
+								th:text="${type.amount}">
+						</option>
+					</select>
+					</div>				
+					<div class="input-group mb-3">
+					  <div class="input-group-prepend">
+					    <span class="input-group-text" id="inputGroup-sizing-default">Start date</span>
+					  </div>
+					  <input name="sDate" type="date" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+					<div class="input-group-prepend">
+					    <span class="input-group-text" id="inputGroup-sizing-default">End date</span>
+					  </div>
+					  <input name="eDate" type="date" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+					</div>
+					
+					<input type="submit" value="Submit" class="btn btn-primary">
+				</form>
+		 	</div>
+	 	</div>
+	  </div>	
+	</body>
+</html>

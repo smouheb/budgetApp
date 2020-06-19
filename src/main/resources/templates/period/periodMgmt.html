@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:insert="reusables :: heads">
+	</head>
+	<body>
+	 <nav th:insert="reusables :: navbars"></nav>
+	  <br>
+	  <div class="container">
+		 <a th:href="@{/new-period}">
+		 	<input class="btn btn-info" value="Add Period">
+		 </a>
+	  	 <h1 class="text-center">Periods</h1>
+	 	<br>
+	  	<form action="/mgmtExpense" method="post">
+			<table class="table table-strip">
+				<thead class="table-primary">
+					<tr>
+						<th>Name</th>
+						<th>Status</th>
+						<th>Start date</th>
+						<th>End date</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="period : ${listOfPeriod}">
+						<td th:text="${period.name}"></td>
+						<td th:text="${period.status}"></td>
+						<td th:text="${{period.startDate}}"></td>
+						<td th:text="${{period.endDate}}"></td>
+						<td>
+							<a th:href="@{/editSavings(id=${period.id})}" class="btn btn-info" style="color:white;">Edit</a>
+						</td>
+						<td>
+							<a th:href="@{/delete-period(id=${period.id})}" class="btn btn-danger" style="color:white;">Delete</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</form>
+	  </div>	
+	</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:insert="reusables :: heads">
+	</head>
+	<body>
+	 <nav th:insert="reusables :: navbars"></nav>
+	  <br>
+	  <div class="container">
+		 <a th:href="@{/saving/new-saving}">
+		 	<input class="btn btn-info" value="Add Saving">
+		 </a>
+	  	 <h1 class="text-center">Savings</h1>
+	 	<br>
+	  	<form action="/mgmtExpense" method="post">
+			<table class="table table-strip">
+				<thead class="table-primary">
+					<tr>
+						<th>Category</th>
+						<th>Amount</th>
+						<th>Date</th>
+						<th>Edit</th>
+						<th>Delete</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="saving : ${list}">
+						<td th:text="${saving.typeSavings.displayItem}"></td>
+						<td th:text="${saving.amount}"></td>
+						<td th:text="${{saving.createdAt}}"></td>
+						<td>
+							<a th:href="@{/editSavings(id=${saving.id})}" class="btn btn-info" style="color:white;">Edit</a>
+						</td>
+						<td>
+							<a th:href="@{/deleteSavings(id=${saving.id})}" class="btn btn-danger" style="color:white;">Delete</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</form>
+	  </div>	
+	</body>
+</html>

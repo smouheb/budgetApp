@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:insert="reusables :: heads">
+	</head>
+	<body>
+	 <nav th:insert="reusables :: navbars"></nav>
+	  <br>
+	  <div class="container">
+		 <a th:href="@{/new}">
+		 	<input class="btn btn-info" value="Add Expense">
+		 </a>
+	  	 <h1 class="text-center">List of Expenses</h1>
+	 	<br>
+	  	<form action="/mgmtExpense" method="post" th:object="${formData}">
+			<table class="table table-strip">
+				<thead class="table-primary">
+					<tr>
+						<th>Name</th>
+						<th>Category</th>
+						<th>Amount</th>
+						<th>Edit</th>
+						<th>Delete</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="expense : ${list}">
+						<td th:text="${expense.name}"></td>
+						<td th:text="${expense.typeExpense.displayItem}"></td>
+						<td th:text="${expense.amount}"></td>
+						<td>
+							<a th:href="@{/edit(id=${expense.id})}" class="btn btn-info" style="color:white;">Edit</a>
+						</td>
+						<td>
+							<a th:href="@{/deleteExpense(id=${expense.id})}" class="btn btn-danger" style="color:white;">Delete</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</form>
+	  </div>	
+	</body>
+</html>

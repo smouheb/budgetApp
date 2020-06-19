@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:insert="reusables :: heads">
+	</head>
+	<body>
+	 <nav th:insert="reusables :: navbars"></nav>
+	  <br>
+	  <div class="container">
+	  	<a th:href="@{/mgmt}">
+		 	<input class="btn btn-info" value="List of Expenses">
+		 </a>
+	  	 <h1 class="text-center">Create Expense</h1>
+	 	<br>
+	 	<div class="row">
+		 	<div class="col-md-6">
+		 		<form action="#" th:action="@{/updateExpense/{id}(id=*{id})}" method="post" th:object="${formData}">
+				  	<div class="input-group mb-3">
+					  <div class="input-group-prepend">
+					    <span class="input-group-text" id="inputGroup-sizing-default">Expense name</span>
+					  </div>
+					  <input th:field="*{name}" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+					</div>
+					<div class="input-group mb-3">
+					  <div class="input-group-prepend">
+					    <span class="input-group-text" id="inputGroup-sizing-default">Category</span>
+					  </div>
+					  <select name="typeExpense" th:field="*{typeExpense}" class="form-control">
+						<option value=""></option>
+						<option th:each="type : ${T(com.budget.fam.enums.TypeExp).values()}"
+								th:value="${type}" 
+								th:selected="${type}"
+								th:text="${type.displayItem}">
+						</option>
+					</select>
+					</div>
+					<div class="input-group mb-3">
+					  <div class="input-group-prepend">
+					    <span class="input-group-text" id="inputGroup-sizing-default">Price</span>
+					  </div>
+					  <input th:field="*{amount}" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">				
+					</div>
+					<input type="submit" value="Submit" class="btn btn-primary">
+				</form>
+		 	</div>
+	 	</div>
+	  </div>	
+	</body>
+</html>
